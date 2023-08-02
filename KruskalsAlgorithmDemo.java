@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-class Graph {
+class KGraph {
     int costMatrix[][];
     int numberOfVerticies;
     int parent[];
 
-    Graph(int numberOfVerticies) {
+    KGraph(int numberOfVerticies) {
         this.numberOfVerticies = numberOfVerticies;
         costMatrix = new int[numberOfVerticies][numberOfVerticies];
         parent = new int[numberOfVerticies];
@@ -33,19 +33,19 @@ class Graph {
 class KruskalsAlgorithmDemo {
     static int totalCost = 0;
 
-    static int find(int vertex, Graph g) {
+    static int find(int vertex, KGraph g) {
         while (g.parent[vertex] != vertex)
             vertex = g.parent[vertex];
         return vertex;
     }
 
-    static void union(int v1, int u1, Graph g) {
-        // can we interchange u1 and v1 here?
-        // g.parent[v1] = u1;
+    static void union(int v1, int u1, KGraph g) {
+        // we can interchange u1 and v1 here
+        // that will also work just fine.
         g.parent[v1] = u1;
     }
 
-    static void kruskal(Graph g) {
+    static void kruskal(KGraph g) {
         int edgeCount = 0, u1 = 0, v1 = 0;
         System.out.println("\nThe edges are:");
         while (edgeCount < g.numberOfVerticies - 1) {
@@ -81,7 +81,7 @@ class KruskalsAlgorithmDemo {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter no of verticies:  ");
         int numberOfVerticies = sc.nextInt();
-        Graph g = new Graph(numberOfVerticies);
+        KGraph g = new KGraph(numberOfVerticies);
         kruskal(g);
         sc.close();
     }

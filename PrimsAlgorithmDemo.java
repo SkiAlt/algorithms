@@ -1,11 +1,11 @@
 import java.util.Scanner;
 
-class Graph {
+class PGraph {
     int costMatrix[][];
     boolean visited[];
     int numberOfVerticies;
 
-    Graph(int numberOfVerticies) {
+    PGraph(int numberOfVerticies) {
         this.numberOfVerticies = numberOfVerticies;
         costMatrix = new int[numberOfVerticies][numberOfVerticies];
         visited = new boolean[numberOfVerticies];
@@ -27,7 +27,7 @@ class Graph {
 
 class PrimsAlgorithmDemo {
     static int totalCost = 0;
-    static void prim(Graph g) {
+    static void prim(PGraph g) {
         int v, u, v1, u1;
         v = u = v1 = u1 = 0;
         System.out.println("The edges are:");
@@ -63,7 +63,7 @@ class PrimsAlgorithmDemo {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter no of verticies:  ");
         int numberOfVerticies = sc.nextInt();
-        Graph g = new Graph(numberOfVerticies);
+        PGraph g = new PGraph(numberOfVerticies);
         prim(g);
         sc.close();
     }
