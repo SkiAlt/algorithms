@@ -33,6 +33,8 @@ class FloydsAlgorithmDemo {
         for (int k = 0; k < g.numberOfVerticies; k++) {
             for (int i = 0; i < g.numberOfVerticies; i++) {
                 for (int j = 0; j < g.numberOfVerticies; j++) {
+                    if(i == k || j == k)
+                        continue;
                     D[i][j] = Math.min(D[i][j], D[i][k] + D[k][j]);
                 }
             }
