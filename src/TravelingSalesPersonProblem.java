@@ -49,7 +49,7 @@ public class TravelingSalesPersonProblem {
             }
         }
         graphSoln[source][minPathVertex] = g.costMatrix[source][minPathVertex] + intermediateCosts[minPathVertex];
-        System.out.println(source + " --> " + minPathVertex);
+        System.out.println("\n"+ source + ", " + minPathVertex + "// debug print of src and minpathvertex");
         return graphSoln[source][minPathVertex];
     }
 
@@ -68,8 +68,10 @@ public class TravelingSalesPersonProblem {
         for (int vertex = 0; vertex < n; vertex++) {
             subset.add(vertex);
         }
+        System.out.println("\n\nVisiting sequence:");
+        System.out.println(ogSource);
         travelingSalesPerson(g, ogSource, subset);
-
+        System.out.println(ogSource);
         s.close();
     }
 }
