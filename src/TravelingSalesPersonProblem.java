@@ -36,8 +36,7 @@ public class TravelingSalesPersonProblem {
         for (int vertex = 0; vertex < g.n; vertex++)
             intermediateCosts[vertex] = 9999; // from source to vertex
         LinkedList<Integer> newSubset = new LinkedList<>(subset);
-
-        newSubset.remove(newSubset.indexOf(source));
+        newSubset.removeFirstOccurrence(source); 
         for (int vertex : subset) {
             intermediateCosts[vertex] = travelingSalesPerson(g, vertex, newSubset);
         }
