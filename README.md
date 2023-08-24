@@ -17,3 +17,4 @@ Some basic algorithms implemented in Java.
     * [Knapsack Fractional <Greedy>](src/KnapsackFractionalGreedy.java)
 	* [Heap sort](src/Heaps.java)
 	* [Floyd's All pair Shortest Path](src/FloydsAlgorithmDemo.java)
+	* [ Minimum Hamiltonian Cycle (aka TravellingSalesMan Problem)] (src/TravelingSalesPersonProblem.java)
