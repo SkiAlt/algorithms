@@ -26,9 +26,9 @@ class TGraph {
 
 public class TravelingSalesPersonProblem {
 
-    static int graphSoln[][]; // global solution array
+    static int graphSoln[][], ogSource;
 
-    static int travelingSalesPerson(TGraph g, int source, LinkedList<Integer> subset, int ogSource) {
+    static int travelingSalesPerson(TGraph g, int source, LinkedList<Integer> subset) {
         if (subset.isEmpty()) {
             return g.costMatrix[source][ogSource];
         }
@@ -36,9 +36,10 @@ public class TravelingSalesPersonProblem {
         for (int vertex = 0; vertex < g.n; vertex++)
             intermediateCosts[vertex] = 9999; // from source to vertex
         LinkedList<Integer> newSubset = new LinkedList<>(subset);
-        newSubset.remove(source);
+
+        newSubset.remove(newSubset.indexOf(source));
         for (int vertex : subset) {
-            intermediateCosts[vertex] = travelingSalesPerson(g, vertex, newSubset, ogSource);
+            intermediateCosts[vertex] = travelingSalesPerson(g, vertex, newSubset);
         }
         int tempweight = 9999;
         int minPathVertex = -1;
@@ -49,6 +50,7 @@ public class TravelingSalesPersonProblem {
             }
         }
         graphSoln[source][minPathVertex] = g.costMatrix[source][minPathVertex] + intermediateCosts[minPathVertex];
+        System.out.println(source + " --> " + minPathVertex);
         return graphSoln[source][minPathVertex];
     }
 
@@ -62,13 +64,12 @@ public class TravelingSalesPersonProblem {
             for (int j = 0; j < n; j++)
                 graphSoln[i][j] = 9999;
         System.out.println("Enter the source vertex: ");
-        int source = s.nextInt();
+        ogSource = s.nextInt();
         LinkedList<Integer> subset = new LinkedList<>();
         for (int vertex = 0; vertex < n; vertex++) {
-            if (vertex != source)
-                subset.add(vertex);
+            subset.add(vertex);
         }
-        travelingSalesPerson(g, source, subset, source);
+        travelingSalesPerson(g, ogSource, subset);
 
         s.close();
     }
