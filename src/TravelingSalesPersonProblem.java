@@ -32,10 +32,6 @@ public class TravelingSalesPersonProblem {
     // graphSoln is useless as you are never really tabulating the results
 
     static int travelingSalesPerson(TGraph g, int source, LinkedList<Integer> subset) {
-        if (subset.isEmpty()) {
-            return g.costMatrix[source][ogSource];
-        }
-
         int intermediateCosts[] = new int[g.n];
         for (int vertex = 0; vertex < g.n; vertex++)
             intermediateCosts[vertex] = 9999;
@@ -44,6 +40,9 @@ public class TravelingSalesPersonProblem {
             LinkedList<Integer> newSubset = new LinkedList<>(subset);
             newSubset.removeFirstOccurrence(vertex);
             System.out.println("newSubset:" + newSubset); // debug line
+            if (newSubset.isEmpty()) {
+                intermediateCosts[vertex] = g.costMatrix[vertex][ogSource];
+            }
             for (int subVerticies : newSubset)
                 intermediateCosts[subVerticies] = travelingSalesPerson(g, vertex, newSubset);
         }
@@ -51,15 +50,15 @@ public class TravelingSalesPersonProblem {
         int tempweight = 9999;
         int minPathVertex = -1;
         for (int v = 0; v < g.n; v++) {
-            if ((g.costMatrix[source][v] +intermediateCosts[v] )< tempweight) {
-                tempweight = g.costMatrix[source][v] +intermediateCosts[v] ;
+            if ((g.costMatrix[v][source] + intermediateCosts[v]) < tempweight) {
+                tempweight = g.costMatrix[v][source] + intermediateCosts[v];
                 minPathVertex = v;
             }
         }
 
         // System.out.printf("\n\n\tDEBUG\tsource: %d, minPathVertex: %d ", source,
         // minPathVertex);
-        visitSequence.push(minPathVertex + 1);
+        // visitSequence.push(minPathVertex + 1); i dunno when to push
         return g.costMatrix[source][minPathVertex] + intermediateCosts[minPathVertex];
     }
 
@@ -87,8 +86,8 @@ public class TravelingSalesPersonProblem {
 }
 /*
  * sample input
- * 0 10 15 20
- * 5 0 9 10
- * 6 13 0 12
- * 8 8 9 0
+  0 10 15 20
+  5 0 9 10
+  6 13 0 12
+  8 8 9 0
  */
