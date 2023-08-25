@@ -12,9 +12,9 @@ Some basic algorithms implemented in Java.
 	* [Kruskal's Mini Spanning Tree](src/KruskalsAlgorithmDemo.java)
 	* [Dijkstra's Single Source Shortest Path](src/DijkstrasAlgorithmDemo.java)
     * [Topological Sort (Source Removal) <Decrese & Conquer>](src/TopologicalSort.java)
-	* [ Minimum Hamiltonian Cycle \(aka TravellingSalesMan Problem\)](src/TravelingSalesPersonProblem.java)
+	* [Floyd's All pair Shortest Path](src/FloydsAlgorithmDemo.java)
+	* [Minimum Hamiltonian Cycle \(aka TravellingSalesMan Problem\)](src/TravelingSalesPersonProblem.java)
 * Misc
     * [Max and Min of Array <Divide & Conquer>](src/DnCMaxMin.java)
     * [Knapsack Fractional <Greedy>](src/KnapsackFractionalGreedy.java)
 	* [Heap sort](src/Heaps.java)
-	* [Floyd's All pair Shortest Path](src/FloydsAlgorithmDemo.java)
