@@ -44,7 +44,8 @@ public class TravelingSalesPersonProblem {
             LinkedList<Integer> newSubset = new LinkedList<>(subset);
             newSubset.removeFirstOccurrence(vertex);
             System.out.println("newSubset:" + newSubset); // debug line
-            intermediateCosts[vertex] = travelingSalesPerson(g, vertex, newSubset);
+            for (int subVerticies : newSubset)
+                intermediateCosts[subVerticies] = travelingSalesPerson(g, vertex, newSubset);
         }
 
         int tempweight = 9999;
@@ -56,7 +57,8 @@ public class TravelingSalesPersonProblem {
             }
         }
 
-        //System.out.printf("\n\n\tDEBUG\tsource: %d, minPathVertex: %d ", source, minPathVertex);
+        // System.out.printf("\n\n\tDEBUG\tsource: %d, minPathVertex: %d ", source,
+        // minPathVertex);
         visitSequence.push(minPathVertex + 1);
         return g.costMatrix[source][minPathVertex] + intermediateCosts[minPathVertex];
     }
@@ -85,8 +87,8 @@ public class TravelingSalesPersonProblem {
 }
 /*
  * sample input
-  0 10 15 20
-  5 0 9 10
-  6 13 0 12
-  8 8 9 0
+ * 0 10 15 20
+ * 5 0 9 10
+ * 6 13 0 12
+ * 8 8 9 0
  */
