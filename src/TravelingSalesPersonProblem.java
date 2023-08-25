@@ -51,8 +51,8 @@ public class TravelingSalesPersonProblem {
         int tempweight = 9999;
         int minPathVertex = -1;
         for (int v = 0; v < g.n; v++) {
-            if (intermediateCosts[v] < tempweight) {
-                tempweight = intermediateCosts[v];
+            if ((g.costMatrix[source][v] +intermediateCosts[v] )< tempweight) {
+                tempweight = g.costMatrix[source][v] +intermediateCosts[v] ;
                 minPathVertex = v;
             }
         }
