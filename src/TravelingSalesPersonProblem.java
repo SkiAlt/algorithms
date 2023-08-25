@@ -27,9 +27,11 @@ class TGraph {
 public class TravelingSalesPersonProblem {
 
     static int ogSource;
+    static int J[][];
 
     static int travelingSalesPerson(TGraph g, int source, LinkedList<Integer> subset) {
         if (subset.isEmpty()) {
+            J[source][ogSource] = g.c[source][ogSource];
             return g.c[source][ogSource];
         }
         int intermediateCosts[] = new int[g.n];
@@ -51,6 +53,7 @@ public class TravelingSalesPersonProblem {
             }
         }
         // I still havent figured out how to print visit sequence
+        J[source][minPathVertex] = intermediateCosts[minPathVertex];
         return intermediateCosts[minPathVertex];
     }
 
@@ -59,6 +62,12 @@ public class TravelingSalesPersonProblem {
         System.out.println("Enter no of verticies:  ");
         int n = s.nextInt();
         TGraph g = new TGraph(n);
+
+        J = new int[n][n];
+        for (int i = 0; i < n; i++)
+            for (int j = 0; j < n; j++)
+                J[i][j] = 9999;
+
         System.out.println("Enter the source vertex: ");
         ogSource = s.nextInt();
         LinkedList<Integer> subset = new LinkedList<>();
@@ -66,11 +75,23 @@ public class TravelingSalesPersonProblem {
             if (vertex != ogSource)
                 subset.add(vertex);
         }
-        
+
         int totalCost = travelingSalesPerson(g, ogSource, subset);
 
         System.out.println("Total tour cost: " + totalCost);
         s.close();
+
+        System.out.println("Printing J[][]\n\n");
+        for (int i = 0; i < n; i++) {
+            for (int j = 0; j < n; j++) {
+                if (J[i][j] == 9999)
+                    System.out.printf("%5s", "-");
+                else
+                    System.out.printf("%5d", J[i][j]);
+            }
+            System.out.println();
+        }
+
     }
 }
 /*
