@@ -95,5 +95,5 @@ public class TravelingSalesPersonProblem {
 }
 /*
  * sample input
- * 0 10 15 20 5 0 9 10 6 13 0 12 8 8 9 0
+ * 0 10 15 20 50 0 9 10 6 13 0 12 8 8 9 0
  */
