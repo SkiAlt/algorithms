@@ -5,7 +5,6 @@ import java.util.LinkedList;
 class TGraph {
     int c[][];
     int n;
-    // boolean visited[];
 
     TGraph(int n) {
         this.n = n;
@@ -25,15 +24,24 @@ class TGraph {
     }
 }
 
+class Sequence {
+    int cost = 9999;
+    LinkedList<Integer> J = new LinkedList<>();
+    
+}
+
 public class TravelingSalesPersonProblem {
 
     static int ogSource;
-    static int J[];
 
-    static int travelingSalesPerson(TGraph g, int source, LinkedList<Integer> subset) {
+    static Sequence travelingSalesPerson(TGraph g, int source, LinkedList<Integer> subset) {
+
+        Sequence s = new Sequence();
+        Sequence subSequence[] = new Sequence[g.n];
         if (subset.isEmpty()) {
-            //J[source] = ogSource;
-            return g.c[source][ogSource];
+            s.J.add(ogSource);
+            s.cost = g.c[source][ogSource];
+            return s;
         }
         int intermediateCosts[] = new int[g.n];
         for (int vertex = 0; vertex < g.n; vertex++)
@@ -42,7 +50,9 @@ public class TravelingSalesPersonProblem {
         for (int vertex : subset) {
             LinkedList<Integer> newSubset = new LinkedList<>(subset);
             newSubset.removeFirstOccurrence(vertex);
-            intermediateCosts[vertex] = g.c[source][vertex] + travelingSalesPerson(g, vertex, newSubset);
+            subSequence[vertex] = travelingSalesPerson(g, vertex, newSubset);
+            intermediateCosts[vertex] = g.c[source][vertex] + subSequence[vertex].cost;
+
         }
 
         int tempweight = 9999;
@@ -54,32 +64,34 @@ public class TravelingSalesPersonProblem {
             }
         }
         // I still havent figured out how to print visit sequence
-        J[source] = minPathVertex;
-        return intermediateCosts[minPathVertex];
+        s.J = new LinkedList<>(subSequence[minPathVertex].J);
+        s.J.add(minPathVertex);
+        s.cost = intermediateCosts[minPathVertex];
+        return s;
     }
+
     public static void main(String[] args) {
-        Scanner s = new Scanner(System.in);
+        Scanner sc = new Scanner(System.in);
         System.out.println("Enter no of verticies:  ");
-        int n = s.nextInt();
+        int n = sc.nextInt();
         TGraph g = new TGraph(n);
 
-        J = new int[n];
-        for (int i = 0; i < n; i++)
-                J[i] = 9999;
-
         System.out.println("Enter the source vertex: ");
-        ogSource = s.nextInt();
+        ogSource = sc.nextInt();
         LinkedList<Integer> subset = new LinkedList<>();
         for (int vertex = 0; vertex < n; vertex++) {
             if (vertex != ogSource)
                 subset.add(vertex);
         }
-
-        int totalCost = travelingSalesPerson(g, ogSource, subset);
-
+        Sequence tour = travelingSalesPerson(g, ogSource, subset);
+        int totalCost = tour.cost;
         System.out.println("Total tour cost: " + totalCost);
-        s.close();
-        System.out.println(Arrays.toString(J));
+        sc.close();
+         System.out.printf("%d", ogSource + 1);
+        while(!tour.J.isEmpty()){
+            System.out.printf("-->%d",(tour.J.removeLast() + 1));
+        }
+        System.out.println();
 
     }
 }
