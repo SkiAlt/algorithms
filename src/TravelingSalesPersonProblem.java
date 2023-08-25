@@ -1,5 +1,4 @@
 import java.util.Scanner;
-import java.util.Arrays;
 import java.util.LinkedList;
 
 class TGraph {
@@ -9,7 +8,6 @@ class TGraph {
     TGraph(int n) {
         this.n = n;
         c = new int[n][n];
-        // visited = new boolean[n];
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter cost matrix:");
         for (int v = 0; v < n; v++) {
@@ -21,13 +19,13 @@ class TGraph {
                     c[v][u] = edgeWeight;
             }
         }
+        sc.close();
     }
 }
 
 class Sequence {
     int cost = 9999;
     LinkedList<Integer> J = new LinkedList<>();
-    
 }
 
 public class TravelingSalesPersonProblem {
@@ -52,7 +50,6 @@ public class TravelingSalesPersonProblem {
             newSubset.removeFirstOccurrence(vertex);
             subSequence[vertex] = travelingSalesPerson(g, vertex, newSubset);
             intermediateCosts[vertex] = g.c[source][vertex] + subSequence[vertex].cost;
-
         }
 
         int tempweight = 9999;
@@ -63,7 +60,6 @@ public class TravelingSalesPersonProblem {
                 minPathVertex = v;
             }
         }
-        // I still havent figured out how to print visit sequence
         s.J = new LinkedList<>(subSequence[minPathVertex].J);
         s.J.add(minPathVertex);
         s.cost = intermediateCosts[minPathVertex];
@@ -74,25 +70,27 @@ public class TravelingSalesPersonProblem {
         Scanner sc = new Scanner(System.in);
         System.out.println("Enter no of verticies:  ");
         int n = sc.nextInt();
-        TGraph g = new TGraph(n);
-
         System.out.println("Enter the source vertex: ");
         ogSource = sc.nextInt();
+        TGraph g = new TGraph(n);
         LinkedList<Integer> subset = new LinkedList<>();
         for (int vertex = 0; vertex < n; vertex++) {
             if (vertex != ogSource)
                 subset.add(vertex);
         }
+
         Sequence tour = travelingSalesPerson(g, ogSource, subset);
+
+        //displaying result
         int totalCost = tour.cost;
         System.out.println("Total tour cost: " + totalCost);
         sc.close();
-         System.out.printf("%d", ogSource + 1);
+        System.out.printf("%d", ogSource + 1);
         while(!tour.J.isEmpty()){
             System.out.printf("-->%d",(tour.J.removeLast() + 1));
         }
         System.out.println();
-
+        sc.close();
     }
 }
 /*
