@@ -18,3 +18,4 @@ Some basic algorithms implemented in Java.
     * [Max and Min of Array <Divide & Conquer>](src/DnCMaxMin.java)
     * [Knapsack Fractional <Greedy>](src/KnapsackFractionalGreedy.java)
 	* [Heap sort](src/Heaps.java)
+	* [Sum of Subsets](src/SumOfSubsetsBT.java)
