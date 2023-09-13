@@ -4,7 +4,6 @@ import java.util.Scanner;
 public class SumOfSubsetsBT {
 
     static int x[]; // global solution array
-    static boolean solutionFound = false;
 
     static int arraySum(int arr[]) {
         int sum = 0;
@@ -17,7 +16,6 @@ public class SumOfSubsetsBT {
         // backtracking conditions
         if (arraySum(x) == d) {
             // soln found
-            solutionFound = true;
             System.out.println(Arrays.toString(x));
             return;
         }
@@ -51,10 +49,10 @@ public class SumOfSubsetsBT {
         System.out.println("Enter sum value 'd'");
         int d = s.nextInt();
         int k = 0;
-        sumOfSubsets(a, d, k);
-        if (!solutionFound) {
+        if(arraySum(a) < d)
             System.out.println("No solution exists");
-        }
+        else
+            sumOfSubsets(a, d, k);
         s.close();
     }
 }
