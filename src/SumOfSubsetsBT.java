@@ -19,8 +19,9 @@ public class SumOfSubsetsBT {
             System.out.println(Arrays.toString(x));
             return;
         }
-        if ((arraySum(x) + a[k + 1]) > d)
-            return; // subset too big
+        if (k + 1 < a.length)
+            if ((arraySum(x) + a[k + 1]) > d)
+                return; // subset too big
         if ((arraySum(x) + arraySum(a)) < d)
             return; // subset too small
 
@@ -49,7 +50,7 @@ public class SumOfSubsetsBT {
         System.out.println("Enter sum value 'd'");
         int d = s.nextInt();
         int k = 0;
-        if(arraySum(a) < d)
+        if (arraySum(a) < d)
             System.out.println("No solution exists");
         else
             sumOfSubsets(a, d, k);
